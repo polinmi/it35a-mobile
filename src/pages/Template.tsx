@@ -10,11 +10,11 @@ const Template: React.FC = () => {
 
                     </IonMenuButton>
                 </IonButtons>
-                <IonTitle>Template</IonTitle>
+                <IonTitle>Template </IonTitle>
             </IonToolbar>
         </IonHeader>
         <IonContent fullscreen >
-            
+
         </IonContent>
     </IonPage>
 
