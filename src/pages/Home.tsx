@@ -1,5 +1,6 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import './Home.css';
+import Menu from "./Menu";
 import ExploreContainer from '../components/ExploreContainer';
 
 import React, { useState, useRef } from 'react';
@@ -37,7 +38,11 @@ const Home: React.FC = () => {
      <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Inline Modal</IonTitle>
+           <IonButtons>
+                    <IonMenuButton>
+
+                    </IonMenuButton>
+                </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
