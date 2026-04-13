@@ -10,7 +10,7 @@ const Search: React.FC = () => {
 
                     </IonMenuButton>
                 </IonButtons>
-                <IonTitle>Search</IonTitle>
+                <IonTitle>Search </IonTitle>
                 <IonSearchbar></IonSearchbar>
             </IonToolbar>
         </IonHeader>
