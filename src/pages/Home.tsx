@@ -1,83 +1,49 @@
-import { IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import './Home.css';
-import Menu from "./Menu";
-import ExploreContainer from '../components/ExploreContainer';
-
-import React, { useState, useRef } from 'react';
 import {
-  IonButtons,
-  IonButton,
-  IonModal,
-  IonItem,
-  IonInput,
-} from '@ionic/react';
+  IonRouterOutlet,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  IonIcon,
+  IonLabel
+} from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+import { Redirect, Route } from "react-router-dom";
+import { homeOutline, search, star } from "ionicons/icons";
 
-import { OverlayEventDetail } from '@ionic/core/components';
+
+import Feed from "./home-tabs/Feed";
+import Search from "./home-tabs/Search";
+import Favorites from "./home-tabs/Favorites";
 
 const Home: React.FC = () => {
-  const [message, setMessage] = useState('');
-  const modal = useRef<HTMLIonModalElement>(null);
-  const input = useRef<HTMLIonInputElement>(null);
-
-  const onWillDismiss = (event: CustomEvent<OverlayEventDetail>) => {
-    const { data } = event.detail;
-    if (data) {
-      setMessage(`Hello, ${data}!`);
-    }
-  };
-
-  const confirm = () => {
-    const name = input.current?.value;
-    if (name) {
-      setMessage(`Hello, ${name}!`);
-      modal.current?.dismiss();
-    }
-  };
+  const tabs = [
+    { name: "Feed", url: "/app/home/feed", icon: homeOutline },
+    { name: "Search", url: "/app/home/search", icon: search },
+    { name: "Favorites", url: "/app/home/favorites", icon: star },
+  ];
 
   return (
-     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-           <IonButtons>
-                    <IonMenuButton>
+    <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet>
+          <Route exact path="/app/home/feed" component={Feed} />
+          <Route exact path="/app/home/search" component={Search} />
+          <Route exact path="/app/home/favorites" component={Favorites} />
+          <Route exact path="/app/home">
+            <Redirect to="/app/home/feed" />
+          </Route>
+        </IonRouterOutlet>
 
-                    </IonMenuButton>
-                </IonButtons>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent className="ion-padding">
-        <IonButton id="open-modal" expand="block">
-          Open
-        </IonButton>
-        <p>{message}</p>
-        <IonModal ref={modal} trigger="open-modal" onWillDismiss={(event) => onWillDismiss(event)}>
-          <IonHeader>
-            <IonToolbar>
-              <IonButtons slot="start">
-                <IonButton onClick={() => modal.current?.dismiss()}>Cancel</IonButton>
-              </IonButtons>
-              <IonTitle>Welcome</IonTitle>
-              <IonButtons slot="end">
-                <IonButton strong={true} onClick={() => confirm()}>
-                  Confirm
-                </IonButton>
-              </IonButtons>
-            </IonToolbar>
-          </IonHeader>
-          <IonContent className="ion-padding">
-            <IonItem>
-              <IonInput
-                label="Enter your name"
-                labelPlacement="stacked"
-                ref={input}
-                type="text"
-                placeholder="Your name"
-              />
-            </IonItem>
-          </IonContent>
-        </IonModal>
-      </IonContent>
-    </IonPage>
+        <IonTabBar slot="bottom">
+          {tabs.map((item, index) => (
+            <IonTabButton key={index} tab={item.name} href={item.url}>
+              <IonIcon icon={item.icon} />
+              <IonLabel>{item.name}</IonLabel>
+            </IonTabButton>
+          ))}
+        </IonTabBar>
+      </IonTabs>
+    </IonReactRouter>
   );
 };
 
