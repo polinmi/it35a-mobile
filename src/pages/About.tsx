@@ -10,7 +10,7 @@ const About: React.FC = () => {
 
                     </IonMenuButton>
                 </IonButtons>
-                <IonTitle>About</IonTitle>
+                <IonTitle>About </IonTitle>
             </IonToolbar>
         </IonHeader>
         <IonContent fullscreen >
